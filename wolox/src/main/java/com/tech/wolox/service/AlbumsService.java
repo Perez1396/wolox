@@ -17,16 +17,17 @@ import org.springframework.web.client.RestTemplate;
  */
 @Service
 public class AlbumsService {
+    private static final String URL = "https://jsonplaceholder.typicode.com/albums";
+    
     @Autowired
     private RestTemplate restTemplate;
     
     public AlbumDTO[] getAlbums() {
-        String url = "https://jsonplaceholder.typicode.com/albums";
-        return restTemplate.getForObject(url, AlbumDTO[].class);
+        return restTemplate.getForObject(URL, AlbumDTO[].class);
     }
     
     public AlbumDTO[] getAlbumsbyUser(Long userId) {
-        String url = "https://jsonplaceholder.typicode.com/albums?userId="+userId.toString();
+        String url = URL+"?userId="+userId.toString();
         return restTemplate.getForObject(url, AlbumDTO[].class);
     }
 }

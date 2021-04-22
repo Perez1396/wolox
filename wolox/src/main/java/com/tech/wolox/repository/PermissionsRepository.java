@@ -5,6 +5,10 @@
  */
 package com.tech.wolox.repository;
 
+import com.tech.wolox.model.Permissions;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Repository;
  * @author Usuario
  */
 @Repository
-public interface PermissionsRepository {
-    
+public interface PermissionsRepository extends JpaRepository <Permissions, Integer> {
+    List<Permissions> findByUserId(Integer userId);
+    Optional<Permissions> findByUserIdAndAlbumId(Integer userId, Integer albumId);
 }
