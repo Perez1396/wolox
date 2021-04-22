@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tech.wolox.services;
+package com.tech.wolox.dto;
 
 /**
  *
  * @author Usuario
  */
-public class AlbumsServices {
+public class PermissionDTO {
     
 }

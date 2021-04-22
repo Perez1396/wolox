@@ -5,10 +5,13 @@
  */
 package com.tech.wolox.repository;
 
+import org.springframework.stereotype.Repository;
+
 /**
  *
  * @author Usuario
  */
+@Repository
 public interface PermissionsRepository {
     
 }

@@ -12,4 +12,6 @@ package com.tech.wolox.model;
 public enum Types {
     READ,
     WRITE
+    
+    
 }
