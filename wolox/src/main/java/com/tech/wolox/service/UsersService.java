@@ -14,15 +14,6 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author Usuario
  */
-@Service
-public class UsersService {
-    private static final String URL = "https://jsonplaceholder.typicode.com/users";
-    
-    @Autowired
-    private RestTemplate restTemplate;
-    
-    public UserDTO[] getUsers() {
-        System.out.println("Acá");
-        return restTemplate.getForObject(URL, UserDTO[].class);
-    }  
+public interface UsersService {
+     UserDTO[] getUsers();
 }

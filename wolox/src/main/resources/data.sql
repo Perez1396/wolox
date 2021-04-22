@@ -9,9 +9,9 @@
  */
 
 
-INSERT INTO permissions (id, user_id, album_id) VALUES
-(1, 1, 1),
-(2, 1, 2);
+INSERT INTO permissions (user_id, album_id) VALUES
+(1, 1),
+(1, 2);
 
 INSERT INTO permissions_types(permissions_id, types) VALUES
 (1,'READ'),

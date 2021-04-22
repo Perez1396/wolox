@@ -14,14 +14,6 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author Usuario
  */
-@Service
-public class PhotosService {
-    private static final String URL = "https://jsonplaceholder.typicode.com/photos";
-    
-    @Autowired
-    private RestTemplate restTemplate;
-    
-    public PhotoDTO[] getPhotos() {
-        return restTemplate.getForObject(URL, PhotoDTO[].class);
-    }
+public interface PhotosService {
+    PhotoDTO[] getPhotos();
 }

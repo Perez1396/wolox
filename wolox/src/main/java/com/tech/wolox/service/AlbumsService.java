@@ -15,19 +15,12 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author Usuario
  */
-@Service
-public class AlbumsService {
-    private static final String URL = "https://jsonplaceholder.typicode.com/albums";
+public interface AlbumsService {
+
+    AlbumDTO[] getAlbums();
+
+    AlbumDTO[] getAlbumsbyUser(Long userId);
     
-    @Autowired
-    private RestTemplate restTemplate;
+    AlbumDTO createAlbum(AlbumDTO albumDTO);
     
-    public AlbumDTO[] getAlbums() {
-        return restTemplate.getForObject(URL, AlbumDTO[].class);
-    }
-    
-    public AlbumDTO[] getAlbumsbyUser(Long userId) {
-        String url = URL+"?userId="+userId.toString();
-        return restTemplate.getForObject(url, AlbumDTO[].class);
-    }
 }
