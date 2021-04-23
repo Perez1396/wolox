@@ -10,5 +10,9 @@ package com.tech.wolox.model;
  * @author Usuario
  */
 public class Address {
-    
+    private String street;
+    private String suite;
+    private String city;
+    private String zipcode;
+    private Geo geo;
 }
