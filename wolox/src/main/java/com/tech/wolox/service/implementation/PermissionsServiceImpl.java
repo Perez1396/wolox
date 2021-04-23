@@ -6,6 +6,7 @@
 package com.tech.wolox.service.implementation;
 
 import com.tech.wolox.dto.PermissionDTO;
+import com.tech.wolox.dto.UserTypeDTO;
 import com.tech.wolox.model.Permissions;
 import com.tech.wolox.model.Types;
 import com.tech.wolox.repository.PermissionsRepository;
@@ -34,27 +35,17 @@ public class PermissionsServiceImpl implements PermissionsService {
 
     @Override
     public PermissionDTO createPermission(PermissionDTO permissionDTO) {
-        Permissions newPermission = new Permissions();
-        List<Permissions> permission = permissionRepository.findByUserId(permissionDTO.getUserId());
-        if (permission.isEmpty()) {
-            PermissionDTO response = modelMapper.map(permissionDTO, PermissionDTO.class);
-            newPermission.setUserId(response.getUserId());
-            newPermission.setAlbumId(response.getAlbumId());
-            permissionRepository.save(newPermission);
-            return response;
-        }
-        else{
-            return null;
-        } 
-            
+            Permissions response = modelMapper.map(permissionDTO, Permissions.class);
+            response = permissionRepository.save(response);
+            PermissionDTO newPermission = modelMapper.map(response, PermissionDTO.class);
+            return newPermission;  
     }
 
     @Override
     public PermissionDTO updatePermission(Integer userId, Integer albumId, PermissionDTO permissionDTO) {
         Optional<Permissions> permission = permissionRepository.findByUserIdAndAlbumId(userId, albumId);
         if (permission.isPresent()) {
-            //permission.get().setTypes(types); TO DO: Hacer el mapeo de los types a string
-
+            permission.get().setTypeId(permissionDTO.getType());
             PermissionDTO response = modelMapper.map(permissionRepository.save(permission.get()), PermissionDTO.class);
             return response;
         }
@@ -71,14 +62,33 @@ public class PermissionsServiceImpl implements PermissionsService {
             responseAlone.setAlbumId(permission.getAlbumId());
             //responseAlone.setType(permission.getTypes().toString());
             Map<String, List<Types>> validationMap = new HashMap<>();
-            validationMap.put("type", permission.getTypes());
-            responseAlone.setType(validationMap.toString());
+            //validationMap.put("type", permission.getTypes());
+            //responseAlone.setType(validationMap.));
             return responseAlone;
         }).forEachOrdered((responseAlone) -> {
             response.add(responseAlone);
         });
         return response;
     }
+
+    @Override
+    public List<Integer> getUsersByAlbumAndType(Permissions permissions) {
+        List<Integer> response = new ArrayList<>();
+         Integer query = permissionRepository.findUserIdAndType(permissions.getAlbumId(), permissions.getTypeId());
+         System.out.println("HELLOOOO"+query);
+         response.add(query);
+         
+         /*for (Permissions permissions : query) {
+             PermissionDTO resp = new PermissionDTO();
+            resp.setUserId(permissions.getUserId());
+            response.add(resp);
+        }*/
+         
+         return response;
+
+    }
+    
+
 
 }
 

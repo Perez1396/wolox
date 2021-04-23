@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Usuario
  */
 @Configuration
-public class Config {
+public class Config  {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
@@ -25,4 +25,5 @@ public class Config {
     public ModelMapper modMapper() {
         return new ModelMapper();
     }
+    
 }

@@ -6,6 +6,9 @@
 package com.tech.wolox.controller;
 
 import com.tech.wolox.dto.PermissionDTO;
+import com.tech.wolox.dto.UserTypeDTO;
+import com.tech.wolox.model.Permissions;
+import com.tech.wolox.model.Types;
 import com.tech.wolox.service.implementation.PermissionsServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -59,10 +63,19 @@ public class PermissionsController {
         }
         
         PermissionDTO response = permissionsServiceImpl.createPermission(permissionDTO);
-        if (response == null) {
-            return ResponseEntity.status(HttpStatus.FOUND).build();
-        }
         
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+    
+    @GetMapping("/byAlbum")
+    public ResponseEntity<List<Integer>> getUsersByAlbumAndType(
+            @RequestBody Permissions permissions){
+        
+        List<Integer> response = permissionsServiceImpl.getUsersByAlbumAndType(permissions);
+        if (response.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(response);
+    }
+    
 }
