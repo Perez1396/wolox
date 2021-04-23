@@ -23,7 +23,7 @@ import org.springframework.stereotype.Repository;
 public interface PermissionsRepository extends JpaRepository <Permissions, Integer> {
     List<Permissions> findByUserId(Integer userId);
     @Query(value = "SELECT p.userId FROM Permissions p WHERE p.albumId = :albumId AND p.typeId = :typeId")
-    Integer findUserIdAndType(@Param("albumId") Integer albumId, @Param("typeId") Integer typeId);
+    List<Integer> findUserIdAndType(@Param("albumId") Integer albumId, @Param("typeId") Integer typeId);
     Optional<Permissions> findByUserIdAndAlbumId(Integer userId, Integer albumId);
     
 }

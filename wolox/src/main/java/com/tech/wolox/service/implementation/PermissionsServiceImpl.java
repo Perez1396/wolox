@@ -6,7 +6,6 @@
 package com.tech.wolox.service.implementation;
 
 import com.tech.wolox.dto.PermissionDTO;
-import com.tech.wolox.dto.UserTypeDTO;
 import com.tech.wolox.model.Permissions;
 import com.tech.wolox.model.Types;
 import com.tech.wolox.repository.PermissionsRepository;
@@ -70,26 +69,6 @@ public class PermissionsServiceImpl implements PermissionsService {
         });
         return response;
     }
-
-    @Override
-    public List<Integer> getUsersByAlbumAndType(Permissions permissions) {
-        List<Integer> response = new ArrayList<>();
-         Integer query = permissionRepository.findUserIdAndType(permissions.getAlbumId(), permissions.getTypeId());
-         System.out.println("HELLOOOO"+query);
-         response.add(query);
-         
-         /*for (Permissions permissions : query) {
-             PermissionDTO resp = new PermissionDTO();
-            resp.setUserId(permissions.getUserId());
-            response.add(resp);
-        }*/
-         
-         return response;
-
-    }
-    
-
-
 }
 
 

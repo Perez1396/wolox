@@ -6,6 +6,7 @@
 package com.tech.wolox.service;
 
 import com.tech.wolox.dto.PhotoDTO;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,4 +17,5 @@ import org.springframework.web.client.RestTemplate;
  */
 public interface PhotosService {
     PhotoDTO[] getPhotos();
+    List<PhotoDTO[]> getPhotosByUser(Integer userId);
 }

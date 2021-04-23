@@ -8,6 +8,9 @@ package com.tech.wolox.service.implementation;
 import com.tech.wolox.dto.AlbumDTO;
 import com.tech.wolox.service.AlbumsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,19 +20,23 @@ import org.springframework.web.client.RestTemplate;
  */
 @Service
 public class AlbumsServiceImpl implements AlbumsService{
-    private static final String URL = "https://jsonplaceholder.typicode.com/albums";
+    private static final String URL = "https://jsonplaceholder.cypress.io/albums";
+    private static final String PARAM = "?userId=";
     
     @Autowired
     private RestTemplate restTemplate;
     
     @Override
     public AlbumDTO[] getAlbums() {
-        return restTemplate.getForObject(URL, AlbumDTO[].class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("user-agent", "Application");
+	HttpEntity<String> entity = new HttpEntity<>(headers);
+        return restTemplate.exchange(URL, HttpMethod.GET, entity, AlbumDTO[].class).getBody();
     }
     
     @Override
     public AlbumDTO[] getAlbumsbyUser(Long userId) {
-        String url = URL+"?userId="+userId.toString();
+        String url = URL+PARAM+userId.toString();
         return restTemplate.getForObject(url, AlbumDTO[].class);
     }
 

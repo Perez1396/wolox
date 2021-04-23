@@ -6,8 +6,6 @@
 package com.tech.wolox.service;
 
 import com.tech.wolox.dto.PermissionDTO;
-import com.tech.wolox.dto.UserTypeDTO;
-import com.tech.wolox.model.Permissions;
 import java.util.List;
 
 /**
@@ -23,5 +21,5 @@ public interface PermissionsService {
 
     List<PermissionDTO> getPermissions();
     
-    List<Integer> getUsersByAlbumAndType(Permissions permissions);
+    
 }
