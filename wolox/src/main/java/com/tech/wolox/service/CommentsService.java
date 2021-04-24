@@ -5,10 +5,15 @@
  */
 package com.tech.wolox.service;
 
+import com.tech.wolox.dto.CommentDTO;
+import com.tech.wolox.dto.PostDTO;
+import java.util.List;
+
 /**
  *
  * @author Usuario
  */
 public interface CommentsService {
-    
+    CommentDTO[] getComments();
+    List<CommentDTO> getCommentsByPost(PostDTO[] postDTO);
 }

@@ -5,8 +5,9 @@
  */
 package com.tech.wolox.controller;
 
-import com.tech.wolox.dto.PhotoDTO;
-import com.tech.wolox.service.PhotosService;
+import com.tech.wolox.dto.CommentDTO;
+import com.tech.wolox.dto.PostDTO;
+import com.tech.wolox.service.PostsService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,21 +21,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Usuario
  */
 @RestController
-@RequestMapping("/photos")
-public class PhotosController {
-
+@RequestMapping("/posts")
+public class PostsController {
+    
     @Autowired
-    private PhotosService photosServices;
-
+    private PostsService postsService;
+    
     @GetMapping()
-    public ResponseEntity<PhotoDTO[]> getPhotos() {
-        PhotoDTO[] respuesta = photosServices.getPhotos();
+    public ResponseEntity<PostDTO[]> getPhotos() {
+        PostDTO[] respuesta = postsService.getPosts();
         return ResponseEntity.ok(respuesta);
     }
     
     @GetMapping("/byUser/{userId}")
-    public ResponseEntity<List<PhotoDTO>> getPhotosByUser(@PathVariable("userId") Integer userId) {
-        List<PhotoDTO> respuesta = photosServices.getPhotosByUser(userId);
+    public ResponseEntity<List<CommentDTO>> getPhotosByUser(@PathVariable("userId") Integer userId) {
+        List<CommentDTO> respuesta = postsService.getPostsByUser(userId);
         return ResponseEntity.ok(respuesta);
     }
 }

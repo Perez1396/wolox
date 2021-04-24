@@ -5,16 +5,15 @@
  */
 package com.tech.wolox.service;
 
-import com.tech.wolox.dto.UserDTO;
-import com.tech.wolox.model.Permissions;
+import com.tech.wolox.dto.CommentDTO;
+import com.tech.wolox.dto.PostDTO;
 import java.util.List;
 
 /**
  *
  * @author Usuario
  */
-public interface UsersService {
-     UserDTO[] getUsers();
-     
-     List<UserDTO> getUsersByAlbumAndType(Permissions permissions);
+public interface PostsService {
+    PostDTO[] getPosts();
+    List<CommentDTO> getPostsByUser(Integer id);
 }

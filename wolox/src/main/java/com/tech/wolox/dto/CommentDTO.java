@@ -14,6 +14,14 @@ import lombok.Setter;
  *
  * @author Usuario
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommentDTO {
-    
+    private Integer id;
+    private Integer postId;
+    private String name;
+    private String email;
+    private String body;
 }

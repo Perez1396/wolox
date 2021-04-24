@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tech.wolox.model;
+package com.tech.wolox.dto;
 
-import javax.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +18,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Embeddable
-public class Geo {
-    private String lat;
-    private String lng;
+public class PostDTO {
+    private Integer id;
+    private Integer userId;
+    private String title;
+    private String body;
+    
 }

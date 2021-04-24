@@ -9,7 +9,9 @@ import com.tech.wolox.dto.AlbumDTO;
 import com.tech.wolox.dto.PhotoDTO;
 import com.tech.wolox.service.PhotosService;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -31,6 +33,9 @@ public class PhotosServiceImpl implements PhotosService{
     @Autowired
     private RestTemplate restTemplate;
     
+    @Autowired
+    private ModelMapper modelMapper;
+    
     @Override
     public PhotoDTO[] getPhotos() {
         HttpHeaders headers = new HttpHeaders();
@@ -40,17 +45,24 @@ public class PhotosServiceImpl implements PhotosService{
     }
 
     @Override
-    public List<PhotoDTO[]> getPhotosByUser(Integer userId) {
+    public List<PhotoDTO> getPhotosByUser(Integer userId) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "Application");
 	HttpEntity<String> entity = new HttpEntity<>(headers);
-        List<PhotoDTO[]> responsePhotos = new ArrayList<>();
         AlbumDTO[] resp = restTemplate.exchange(URL_ALBUMS+PARAM_USER+userId, HttpMethod.GET, entity, AlbumDTO[].class).getBody();
-        for (AlbumDTO albumDTO : resp) {
-          PhotoDTO[] respPhotos = restTemplate.exchange(URL_ALBUMS+PARAM_ALBUM+albumDTO.getId(), HttpMethod.GET, entity, PhotoDTO[].class).getBody();
-          responsePhotos.add(respPhotos);
-        }
-        return responsePhotos;
+        List<PhotoDTO> userResponse = getPhotosByAlbum(resp, entity);
+        return userResponse;
     }
+    
+    private List<PhotoDTO> getPhotosByAlbum(AlbumDTO[] resp, HttpEntity<String> entity ){
+        List<PhotoDTO> userResponse = new ArrayList<>();
+        for (AlbumDTO albumDTO : resp) {
+          PhotoDTO[] respPhotos = restTemplate.exchange(URL+PARAM_ALBUM+albumDTO.getId(), HttpMethod.GET, entity, PhotoDTO[].class).getBody();
+          userResponse.addAll(Arrays.asList(respPhotos));
+        }
+        return userResponse;
+    }
+    
+    
     
 }

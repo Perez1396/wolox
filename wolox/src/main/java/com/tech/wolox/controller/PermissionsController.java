@@ -6,7 +6,7 @@
 package com.tech.wolox.controller;
 
 import com.tech.wolox.dto.PermissionDTO;
-import com.tech.wolox.service.implementation.PermissionsServiceImpl;
+import com.tech.wolox.service.PermissionsService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,11 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class PermissionsController {
     
     @Autowired
-    private PermissionsServiceImpl permissionsServiceImpl;
+    private PermissionsService permissionsService;
     
     @GetMapping()
     public ResponseEntity<List<PermissionDTO>> getPermission(){
-        List<PermissionDTO> response = permissionsServiceImpl.getPermissions();
+        List<PermissionDTO> response = permissionsService.getPermissions();
         if (response.isEmpty()) {
            ResponseEntity.noContent();
         }
@@ -44,7 +44,7 @@ public class PermissionsController {
             @PathVariable("userId") Integer userId,
             @PathVariable("albumId") Integer albumId,
             @RequestBody PermissionDTO permissionDTO){
-    PermissionDTO response = permissionsServiceImpl.updatePermission(userId, albumId, permissionDTO);
+    PermissionDTO response = permissionsService.updatePermission(userId, albumId, permissionDTO);
         if (response == null) {
             ResponseEntity.notFound();
         }
@@ -58,7 +58,7 @@ public class PermissionsController {
             return ResponseEntity.badRequest().build();
         }
         
-        PermissionDTO response = permissionsServiceImpl.createPermission(permissionDTO);
+        PermissionDTO response = permissionsService.createPermission(permissionDTO);
         
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
