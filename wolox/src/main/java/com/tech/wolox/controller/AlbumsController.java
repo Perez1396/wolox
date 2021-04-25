@@ -7,6 +7,7 @@ package com.tech.wolox.controller;
 
 import com.tech.wolox.dto.AlbumDTO;
 import com.tech.wolox.service.AlbumsService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/albums")
+@Api(value = "Albums management")
 public class AlbumsController {
     
     @Autowired

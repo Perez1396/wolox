@@ -16,6 +16,10 @@ import org.springframework.web.client.RestTemplate;
  */
 @Configuration
 public class Config  {
+    
+    private static final String base = "com.tech.wolox.controller";
+    private static final String regex = "/.*";
+    
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
