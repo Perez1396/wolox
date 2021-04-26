@@ -34,6 +34,9 @@ public class PermissionsServiceImpl implements PermissionsService {
 
     @Override
     public PermissionDTO createPermission(PermissionDTO permissionDTO) {
+        if (permissionDTO == null) {
+            return null;
+        }
             Permissions response = modelMapper.map(permissionDTO, Permissions.class);
             response = permissionRepository.save(response);
             PermissionDTO newPermission = modelMapper.map(response, PermissionDTO.class);
@@ -55,17 +58,8 @@ public class PermissionsServiceImpl implements PermissionsService {
     public List<PermissionDTO> getPermissions() {
         List<PermissionDTO> response = new ArrayList<>();
         List<Permissions> permissions = permissionRepository.findAll();
-        permissions.stream().map((permission) -> {
-            PermissionDTO responseAlone = new PermissionDTO();
-            responseAlone.setUserId(permission.getUserId());
-            responseAlone.setAlbumId(permission.getAlbumId());
-            //responseAlone.setType(permission.getTypes().toString());
-            Map<String, List<Types>> validationMap = new HashMap<>();
-            //validationMap.put("type", permission.getTypes());
-            //responseAlone.setType(validationMap.));
-            return responseAlone;
-        }).forEachOrdered((responseAlone) -> {
-            response.add(responseAlone);
+        permissions.stream().map((permission) -> modelMapper.map(permission, PermissionDTO.class)).forEachOrdered((responses) -> {
+            response.add(responses);
         });
         return response;
     }

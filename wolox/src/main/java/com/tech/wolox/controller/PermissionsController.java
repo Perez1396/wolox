@@ -39,7 +39,7 @@ public class PermissionsController {
     public ResponseEntity<List<PermissionDTO>> getPermission(){
         List<PermissionDTO> response = permissionsService.getPermissions();
         if (response.isEmpty()) {
-           ResponseEntity.noContent();
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(response);
     }
@@ -55,7 +55,7 @@ public class PermissionsController {
             @RequestBody PermissionDTO permissionDTO){
     PermissionDTO response = permissionsService.updatePermission(userId, albumId, permissionDTO);
         if (response == null) {
-            ResponseEntity.notFound();
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         
         return ResponseEntity.ok(response);

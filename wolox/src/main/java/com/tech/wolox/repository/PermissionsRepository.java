@@ -5,9 +5,7 @@
  */
 package com.tech.wolox.repository;
 
-import com.tech.wolox.dto.UserTypeDTO;
 import com.tech.wolox.model.Permissions;
-import com.tech.wolox.model.Types;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

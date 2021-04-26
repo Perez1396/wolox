@@ -33,8 +33,6 @@ public class PhotosServiceImpl implements PhotosService{
     @Autowired
     private RestTemplate restTemplate;
     
-    @Autowired
-    private ModelMapper modelMapper;
     
     @Override
     public PhotoDTO[] getPhotos() {
