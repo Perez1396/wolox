@@ -35,9 +35,12 @@ public class AlbumsServiceImpl implements AlbumsService{
     }
     
     @Override
-    public AlbumDTO[] getAlbumsbyUser(Long userId) {
+    public AlbumDTO[] getAlbumsbyUser(Integer userId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("user-agent", "Application");
+	HttpEntity<String> entity = new HttpEntity<>(headers);
         String url = URL+PARAM+userId.toString();
-        return restTemplate.getForObject(url, AlbumDTO[].class);
+        return restTemplate.exchange(url, HttpMethod.GET, entity, AlbumDTO[].class).getBody();
     }
 
     @Override

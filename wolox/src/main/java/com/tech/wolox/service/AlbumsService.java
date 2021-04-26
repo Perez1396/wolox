@@ -19,7 +19,7 @@ public interface AlbumsService {
 
     AlbumDTO[] getAlbums();
 
-    AlbumDTO[] getAlbumsbyUser(Long userId);
+    AlbumDTO[] getAlbumsbyUser(Integer userId);
     
     AlbumDTO createAlbum(AlbumDTO albumDTO);
     
