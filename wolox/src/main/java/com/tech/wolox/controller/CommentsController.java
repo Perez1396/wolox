@@ -9,9 +9,12 @@ import com.tech.wolox.dto.CommentDTO;
 import com.tech.wolox.service.CommentsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +33,18 @@ public class CommentsController {
     @ApiOperation(value = "Retrieve all the comments from the JSON.")
     @GetMapping()
     public ResponseEntity<CommentDTO[]> getComments() {
-        CommentDTO[] respuesta = commentsService.getComments();
-        return ResponseEntity.ok(respuesta);
+        CommentDTO[] response = commentsService.getComments();
+        return ResponseEntity.ok(response);
+    }
+    
+    @ApiOperation(value = "Retrieve all the comments  filtered by name.")
+    @GetMapping("/byName/{name}")
+    public ResponseEntity<List<CommentDTO>> getCommentsByUser(@PathVariable("name") String name) {
+        List<CommentDTO> response = commentsService.getCommentsByName(name);
+        if (response.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(response);
     }
     
 }

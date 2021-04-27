@@ -68,7 +68,11 @@ public class PermissionsControllerTest {
      */
     @Test
     public void testUpdatePermission() {
-        PermissionDTO permissionDTO2 = new PermissionDTO(1,1,1,1);
+        PermissionDTO permissionDTO2 = new PermissionDTO();
+        permissionDTO2.setId(permissionDTO.getId());
+        permissionDTO2.setAlbumId(permissionDTO.getAlbumId());
+        permissionDTO2.setType(permissionDTO.getType());
+        permissionDTO2.setUserId(permissionDTO.getUserId());
         when(permissionService.updatePermission(permissionDTO.userId, permissionDTO.albumId, permissionDTO2)).thenReturn(permissionDTO2);
         ResponseEntity<PermissionDTO> testing = permissionController.updatePermission(permissionDTO.userId, permissionDTO.albumId, permissionDTO2); 
         assertEquals(ResponseEntity.ok(permissionDTO2), testing);

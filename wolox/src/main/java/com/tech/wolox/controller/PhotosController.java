@@ -33,8 +33,8 @@ public class PhotosController {
     @ApiOperation(value = "Retrieve all the photos from the JSON data.")
     @GetMapping()
     public ResponseEntity<PhotoDTO[]> getPhotos() {
-        PhotoDTO[] respuesta = photosServices.getPhotos();
-        return ResponseEntity.ok(respuesta);
+        PhotoDTO[] response = photosServices.getPhotos();
+        return ResponseEntity.ok(response);
     }
     
     @ApiOperation(value = "Retrieve all the photos that belongs to a user from the JSON data.")
@@ -42,7 +42,7 @@ public class PhotosController {
     public ResponseEntity<List<PhotoDTO>> getPhotosByUser(
             @ApiParam(value = "ID corresponding to a user", required = true)
             @PathVariable("userId") Integer userId) {
-        List<PhotoDTO> respuesta = photosServices.getPhotosByUser(userId);
-        return ResponseEntity.ok(respuesta);
+        List<PhotoDTO> response = photosServices.getPhotosByUser(userId);
+        return ResponseEntity.ok(response);
     }
 }

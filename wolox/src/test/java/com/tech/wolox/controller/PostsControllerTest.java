@@ -59,11 +59,16 @@ public class PostsControllerTest {
      */
     @Test
     public void testGetPostsByUser() {
+        PostDTO postDTO2 = new PostDTO();
+        postDTO2.setId(postDTO.getId());
+        postDTO2.setUserId(postDTO.getUserId());
+        postDTO2.setTitle(postDTO.getTitle());
+        postDTO2.setBody(postDTO.getBody());
         List<CommentDTO> listPosts = new ArrayList<>();
         listPosts.add(commentDTO);
         
-        when(postService.getPostsByUser(postDTO.getId())).thenReturn(listPosts);
-        ResponseEntity<List<CommentDTO>> testing = postController.getPostsByUser(postDTO.getId()); 
+        when(postService.getPostsByUser(postDTO2.getId())).thenReturn(listPosts);
+        ResponseEntity<List<CommentDTO>> testing = postController.getPostsByUser(postDTO2.getId()); 
         assertEquals(ResponseEntity.ok(listPosts), testing);
     }
     

@@ -21,6 +21,4 @@ public interface AlbumsService {
 
     AlbumDTO[] getAlbumsbyUser(Integer userId);
     
-    AlbumDTO createAlbum(AlbumDTO albumDTO);
-    
 }

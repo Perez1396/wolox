@@ -32,8 +32,8 @@ public class AlbumsController {
     @ApiOperation(value = "Retrieve all the albums from the JSON.")
     @GetMapping()
     public ResponseEntity<AlbumDTO[]> getAlbums() {
-        AlbumDTO[] respuesta = albumServices.getAlbums();
-        return ResponseEntity.ok(respuesta);
+        AlbumDTO[] response = albumServices.getAlbums();
+        return ResponseEntity.ok(response);
     }
 
     @ApiOperation(value = "Obtain all the albums that are associated to an especific user.")
@@ -41,8 +41,8 @@ public class AlbumsController {
     public ResponseEntity<AlbumDTO[]> getAlbumsByUser(
             @ApiParam(value = "ID corresponding to a user who has an album associated.", required = true)
             @PathVariable("userId") Integer userId) {
-        AlbumDTO[] respuesta = albumServices.getAlbumsbyUser(userId);
-        return ResponseEntity.ok(respuesta);
+        AlbumDTO[] response = albumServices.getAlbumsbyUser(userId);
+        return ResponseEntity.ok(response);
     }
 
 }

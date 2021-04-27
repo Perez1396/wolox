@@ -34,8 +34,8 @@ public class PostsController {
     @ApiOperation(value = "Retrieve all the posts from the JSON data.")
     @GetMapping()
     public ResponseEntity<PostDTO[]> getPosts() {
-        PostDTO[] respuesta = postsService.getPosts();
-        return ResponseEntity.ok(respuesta);
+        PostDTO[] response = postsService.getPosts();
+        return ResponseEntity.ok(response);
     }
     
     @ApiOperation(value = "Retrieve all the posts that belongs to a user from the JSON data.")
@@ -43,7 +43,7 @@ public class PostsController {
     public ResponseEntity<List<CommentDTO>> getPostsByUser(
             @ApiParam(value = "ID corresponding to a user", required = true)
             @PathVariable("userId") Integer userId) {
-        List<CommentDTO> respuesta = postsService.getPostsByUser(userId);
-        return ResponseEntity.ok(respuesta);
+        List<CommentDTO> response = postsService.getPostsByUser(userId);
+        return ResponseEntity.ok(response);
     }
 }

@@ -28,6 +28,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 public class AlbumsControllerTest {
+    private static AlbumDTO album = new AlbumDTO(1,1,"album");
     @Mock
     private AlbumsServiceImpl albumService;
     
@@ -43,11 +44,6 @@ public class AlbumsControllerTest {
      */
     @Test
     public void testGetAlbums() {
-        Integer userId = 1; 
-        Integer id = 1;
-        String title= "Juan";
-        
-        AlbumDTO album = new AlbumDTO(userId,id,title);
         List<AlbumDTO> listAlbums = new ArrayList<>();
         listAlbums.add(album);
         AlbumDTO[] listAlbumDTO = new AlbumDTO[1];
@@ -63,13 +59,13 @@ public class AlbumsControllerTest {
      */
     @Test
     public void testGetAlbumsByUser() {
-        Integer userId = 1; 
-        Integer id = 1;
-        String title= "Juan";
         
-        AlbumDTO album = new AlbumDTO(userId,id,title);
+        AlbumDTO album2 = new AlbumDTO();
+        album2.setId(album.getId());
+        album2.setUserId(album.getUserId());
+        album2.setTitle(album.getTitle());
         List<AlbumDTO> listAlbums = new ArrayList<>();
-        listAlbums.add(album);
+        listAlbums.add(album2);
         AlbumDTO[] listAlbumDTO = new AlbumDTO[1];
         listAlbums.toArray(listAlbumDTO);
         

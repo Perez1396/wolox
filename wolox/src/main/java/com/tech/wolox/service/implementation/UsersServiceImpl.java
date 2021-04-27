@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,7 +27,6 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class UsersServiceImpl implements UsersService{
     private static final String URL = "https://jsonplaceholder.cypress.io/users";
-    
     private static final String URL_USER = "https://jsonplaceholder.cypress.io/users/";
     
     @Autowired
@@ -55,8 +55,8 @@ public class UsersServiceImpl implements UsersService{
         List<UserDTO> userResponse = new ArrayList<>();
         List<Integer> query = permissionRepository.findUserIdAndType(permissions.getAlbumId(), permissions.getTypeId());
         for (int i = 0; i < query.size(); i++) {
-            UserDTO resp = restTemplate.exchange(URL_USER+query.get(i), HttpMethod.GET, entity, UserDTO.class).getBody();
-            userResponse.add(resp);
+            ResponseEntity<UserDTO> resp = restTemplate.exchange(URL_USER+query.get(i), HttpMethod.GET, entity, UserDTO.class);
+            userResponse.add(resp.getBody());
         }
         return userResponse;
     }

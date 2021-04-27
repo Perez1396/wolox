@@ -60,8 +60,13 @@ public class PhotosControllerTest {
     public void testGetPhotosByUser() {
         AlbumDTO albumDTO = new AlbumDTO(1,1,"test");
         photoDTO.setId(albumDTO.getUserId());
+        PhotoDTO photoDTO2 = new PhotoDTO();
+        photoDTO2.setTitle(photoDTO.getTitle());
+        photoDTO2.setThumbnailUrl(photoDTO.getThumbnailUrl());
+        photoDTO2.setAlbumId(photoDTO.getAlbumId());
+        photoDTO2.setUrl(photoDTO.getUrl());
         List<PhotoDTO> listPhotos = new ArrayList<>();
-        listPhotos.add(photoDTO);
+        listPhotos.add(photoDTO2);
         
         when(photoService.getPhotosByUser(photoDTO.getId())).thenReturn(listPhotos);
         ResponseEntity<List<PhotoDTO>> testing = photoController.getPhotosByUser(photoDTO.getId()); 
