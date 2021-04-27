@@ -19,6 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentDTO {
+
     private Integer id;
     private Integer postId;
     private String name;

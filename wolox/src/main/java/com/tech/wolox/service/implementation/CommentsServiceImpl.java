@@ -7,7 +7,6 @@ package com.tech.wolox.service.implementation;
 
 import com.tech.wolox.dto.CommentDTO;
 import com.tech.wolox.dto.PostDTO;
-import com.tech.wolox.dto.UserDTO;
 import com.tech.wolox.service.CommentsService;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,7 +58,8 @@ public class CommentsServiceImpl implements CommentsService {
         List<CommentDTO> commentResponse = new ArrayList<>();
         log.info("Iteration to save in an Array the comments that a user made in a post.");
         for (PostDTO postDTO : resp) {
-          ResponseEntity<CommentDTO[]> respComment = restTemplate.exchange(URL+PARAM_COMMENTS+postDTO.getId(), HttpMethod.GET, entity, CommentDTO[].class);
+          ResponseEntity<CommentDTO[]> respComment = restTemplate
+                  .exchange(URL+PARAM_COMMENTS+postDTO.getId(), HttpMethod.GET, entity, CommentDTO[].class);
           commentResponse.addAll(Arrays.asList(respComment.getBody()));
         }
         return commentResponse;

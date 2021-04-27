@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -35,10 +34,10 @@ import org.springframework.web.client.RestTemplate;
  */
 @RunWith(SpringRunner.class)
 public class UsersServiceImplTest {
-    private static CompanyDTO company = new CompanyDTO("wolox","Here we are","231564");
-    private static GeoDTO geo = new GeoDTO("05123", "0231");
-    private static AddressDTO address = new AddressDTO("St 402 Mt. bour","presidential","Pereira","660004",geo);
-    private static UserDTO mockedUser = new UserDTO(1,"Juan","juan@something.com","juan@something.com",address,"3218705321","www.something.com",company);
+    private static final CompanyDTO company = new CompanyDTO("wolox","Here we are","231564");
+    private static final GeoDTO geo = new GeoDTO("05123", "0231");
+    private static final AddressDTO address = new AddressDTO("St 402 Mt. bour","presidential","Pereira","660004",geo);
+    private static final UserDTO mockedUser = new UserDTO(1,"Juan","juan@something.com","juan@something.com",address,"3218705321","www.something.com",company);
 
     private static final String URL = "https://jsonplaceholder.cypress.io/users";
     private static final String URL_USER = "https://jsonplaceholder.cypress.io/users/";
@@ -62,8 +61,13 @@ public class UsersServiceImplTest {
     @Test
     public void testGetUsers() {
         List<UserDTO> listUsers = new ArrayList<>();
-        listUsers.add(mockedUser);
+        
         UserDTO[] listUserDTO = new UserDTO[1];
+        AddressDTO testingAddres = new AddressDTO();
+        
+        testingAddres.setGeo(address.getGeo());
+                
+        listUsers.add(mockedUser);
         listUsers.toArray(listUserDTO);
         
         HttpHeaders headers = new HttpHeaders();
@@ -80,15 +84,18 @@ public class UsersServiceImplTest {
     /**
      * Test of getUsersByAlbumAndType method, of class UsersServiceImpl.
      */
-    /*@Test
+    @Test
     public void testGetUsersByAlbumAndType() {
         UserDTO user = new UserDTO(1,"Juan","juan@something.com","juan@something.com",address,"3218705321","www.something.com",company);
         Permissions permission = new Permissions(1,1,1,1);
+        
+        UserDTO testing = new UserDTO();
+        testing.setCompany(mockedUser.getCompany());
+        testing.setAddress(mockedUser.getAddress());
+        
         List<Integer> listIntegers = new ArrayList<>();
-        List<UserDTO> users = new ArrayList<>();
+        
         listIntegers.add(1);
-        listIntegers.add(2);
-        listIntegers.add(3);
         
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "Application");
@@ -96,11 +103,11 @@ public class UsersServiceImplTest {
         
         when(permissionRepository.findUserIdAndType(permission.getAlbumId(), permission.getTypeId()))
                 .thenReturn(listIntegers);
-        when(restTemplate.exchange(URL_USER+listIntegers.get(1), HttpMethod.GET, entity, UserDTO.class))
+        when(restTemplate.exchange(URL_USER+listIntegers.get(0), HttpMethod.GET, entity, UserDTO.class))
                 .thenReturn(new ResponseEntity<>(user,HttpStatus.OK));
         List<UserDTO> response = userService.getUsersByAlbumAndType(permission);
         Assert.assertNotNull(response);
         Assert.assertEquals(response.size(), listIntegers.size());
-    }*/
+    }
     
 }

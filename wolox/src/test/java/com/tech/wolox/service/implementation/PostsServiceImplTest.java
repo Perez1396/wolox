@@ -6,17 +6,12 @@
 package com.tech.wolox.service.implementation;
 
 import com.tech.wolox.dto.CommentDTO;
-import com.tech.wolox.dto.PhotoDTO;
 import com.tech.wolox.dto.PostDTO;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

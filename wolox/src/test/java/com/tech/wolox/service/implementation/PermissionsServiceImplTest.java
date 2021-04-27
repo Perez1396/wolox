@@ -7,6 +7,7 @@ package com.tech.wolox.service.implementation;
 
 import com.tech.wolox.dto.PermissionDTO;
 import com.tech.wolox.model.Permissions;
+import com.tech.wolox.model.Types;
 import com.tech.wolox.repository.PermissionsRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -72,16 +69,19 @@ public class PermissionsServiceImplTest {
      */
     @Test
     public void testUpdatePermission() {
-        PermissionDTO permissionDTO = new PermissionDTO(1,1,1,2);
         Optional<Permissions> listPermissions = Optional.of(new Permissions(1,1,1,1));
         List<PermissionDTO> listPermissionsDTO = new ArrayList<>();
+        
+        PermissionDTO permissionDTO = new PermissionDTO(1,1,1,2);
         Permissions permissions = new Permissions(1,1,1,1);
+        
         listPermissionsDTO.add(permissionDTO);
                 
         when(permissionRepository.findByUserIdAndAlbumId(1, 1))
                 .thenReturn(listPermissions);
         when(modelMapper.map(permissionRepository.save(permissions), PermissionDTO.class))
                 .thenReturn(permissionDTO);
+        
         PermissionDTO response = permissionService.updatePermission(1,1, permissionDTO);
         Assert.assertNotNull(response);
         Assert.assertEquals(response.getId(), listPermissions.get().getId());
@@ -90,8 +90,10 @@ public class PermissionsServiceImplTest {
     @Test
     public void testUpdatePermissionsReturnNull() {
         List<PermissionDTO> listPermissionsDTO = new ArrayList<>();
-        PermissionDTO permissionDTO = new PermissionDTO(1,1,1,2);
         Optional<Permissions> listPermissions = Optional.empty();
+        
+        PermissionDTO permissionDTO = new PermissionDTO(1,1,1,2);
+        
         listPermissionsDTO.add(permissionDTO);
         when(permissionRepository.findByUserIdAndAlbumId(1, 1))
                 .thenReturn(listPermissions);
@@ -107,11 +109,17 @@ public class PermissionsServiceImplTest {
         List<PermissionDTO> listPermissionsDTO = new ArrayList<>();
         
         PermissionDTO permissionDTO = new PermissionDTO(1,1,1,2);
+        Types typesAux = new Types(1,"READ");
+        
         Permissions permissions = new Permissions();
         permissions.setId(permissions2.getId());
         permissions.setAlbumId(permissions2.getAlbumId());
         permissions.setUserId(permissions2.getUserId());
         permissions.setTypeId(permissions2.getTypeId());
+        
+        Types types = new Types();
+        types.setId(typesAux.getId());
+        types.setTypePer(types.getTypePer());
         
         listPermissionsDTO.add(permissionDTO);
                

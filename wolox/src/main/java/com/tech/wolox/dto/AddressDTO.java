@@ -19,6 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddressDTO {
+
     private String street;
     private String suite;
     private String city;

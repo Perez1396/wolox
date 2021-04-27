@@ -19,6 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AlbumDTO {
+
     private Integer userId;
     private Integer id;
     private String title;

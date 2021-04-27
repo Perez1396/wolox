@@ -18,14 +18,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO{
-   private Integer id;
-   private String name;
-   private String username;
-   private String email;
-   private AddressDTO address;
-   private String phone;
-   private String website;
-   private CompanyDTO company;
-   
+public class UserDTO {
+
+    private Integer id;
+    private String name;
+    private String username;
+    private String email;
+    private AddressDTO address;
+    private String phone;
+    private String website;
+    private CompanyDTO company;
+
 }

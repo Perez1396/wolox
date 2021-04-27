@@ -11,6 +11,7 @@ import com.tech.wolox.repository.PermissionsRepository;
 import com.tech.wolox.service.UsersService;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -24,6 +25,7 @@ import org.springframework.web.client.RestTemplate;
  *
  * @author Usuario
  */
+@Slf4j
 @Service
 public class UsersServiceImpl implements UsersService{
     private static final String URL = "https://jsonplaceholder.cypress.io/users";
@@ -43,6 +45,7 @@ public class UsersServiceImpl implements UsersService{
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "Application");
 	HttpEntity<String> entity = new HttpEntity<>(headers);
+        log.info("Retrieve all the users from the json data");
         return restTemplate.exchange(URL, HttpMethod.GET, entity, UserDTO[].class).getBody();
          
     } 
@@ -53,9 +56,13 @@ public class UsersServiceImpl implements UsersService{
         headers.add("user-agent", "Application");
 	HttpEntity<String> entity = new HttpEntity<>(headers);
         List<UserDTO> userResponse = new ArrayList<>();
-        List<Integer> query = permissionRepository.findUserIdAndType(permissions.getAlbumId(), permissions.getTypeId());
+        log.info("Retrieve all the users from the H2 databases with the correspoding type of permission and album");
+        List<Integer> query = permissionRepository
+                .findUserIdAndType(permissions.getAlbumId(), permissions.getTypeId());
         for (int i = 0; i < query.size(); i++) {
-            ResponseEntity<UserDTO> resp = restTemplate.exchange(URL_USER+query.get(i), HttpMethod.GET, entity, UserDTO.class);
+            log.info("The list of id's uses the iterator to do another httpMethod to the json data");
+            ResponseEntity<UserDTO> resp = restTemplate
+                    .exchange(URL_USER+query.get(i), HttpMethod.GET, entity, UserDTO.class);
             userResponse.add(resp.getBody());
         }
         return userResponse;

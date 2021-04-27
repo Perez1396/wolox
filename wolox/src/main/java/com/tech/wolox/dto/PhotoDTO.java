@@ -19,6 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PhotoDTO {
+
     private Integer id;
     private Integer albumId;
     private String title;

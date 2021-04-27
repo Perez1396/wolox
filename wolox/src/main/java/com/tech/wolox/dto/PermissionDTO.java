@@ -19,9 +19,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PermissionDTO {
+
     public Integer id;
     public Integer userId;
     public Integer albumId;
     public Integer type;
-    
+
 }

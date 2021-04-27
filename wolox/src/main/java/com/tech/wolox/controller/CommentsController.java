@@ -10,6 +10,7 @@ import com.tech.wolox.service.CommentsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,21 +23,23 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Usuario
  */
+@Slf4j
 @Api(tags = "Comments consultation controller")
 @RestController
 @RequestMapping("/comments")
 public class CommentsController {
-    
+
     @Autowired
     private CommentsService commentsService;
-    
+
     @ApiOperation(value = "Retrieve all the comments from the JSON.")
     @GetMapping()
     public ResponseEntity<CommentDTO[]> getComments() {
+        log.info("With the endpoint /comments is called the service to retrieve the data.");
         CommentDTO[] response = commentsService.getComments();
         return ResponseEntity.ok(response);
     }
-    
+
     @ApiOperation(value = "Retrieve all the comments  filtered by name.")
     @GetMapping("/byName/{name}")
     public ResponseEntity<List<CommentDTO>> getCommentsByUser(@PathVariable("name") String name) {
@@ -46,5 +49,5 @@ public class CommentsController {
         }
         return ResponseEntity.ok(response);
     }
-    
+
 }

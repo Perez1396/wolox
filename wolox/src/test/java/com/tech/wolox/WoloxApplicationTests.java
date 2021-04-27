@@ -11,6 +11,8 @@ class WoloxApplicationTests {
 
 	@Test
 	void contextLoads() {
+            WoloxApplication.main(new String[] {});
 	}
+        
 
 }

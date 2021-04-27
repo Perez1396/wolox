@@ -19,9 +19,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostDTO {
+
     private Integer id;
     private Integer userId;
     private String title;
     private String body;
-    
+
 }

@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,26 +24,29 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Usuario
  */
+@Slf4j
 @Api(tags = "Posts consultation controller")
 @RestController
 @RequestMapping("/posts")
 public class PostsController {
-    
+
     @Autowired
     private PostsService postsService;
-    
+
     @ApiOperation(value = "Retrieve all the posts from the JSON data.")
     @GetMapping()
     public ResponseEntity<PostDTO[]> getPosts() {
+        log.info("With the endpoint /posts is called the service to retrieve the data.");
         PostDTO[] response = postsService.getPosts();
         return ResponseEntity.ok(response);
     }
-    
+
     @ApiOperation(value = "Retrieve all the posts that belongs to a user from the JSON data.")
     @GetMapping("/byUser/{userId}")
     public ResponseEntity<List<CommentDTO>> getPostsByUser(
             @ApiParam(value = "ID corresponding to a user", required = true)
             @PathVariable("userId") Integer userId) {
+        log.info("Is called the service to retrieve the data with the specific user ID.");
         List<CommentDTO> response = postsService.getPostsByUser(userId);
         return ResponseEntity.ok(response);
     }
